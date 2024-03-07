@@ -12,14 +12,25 @@ raw_numbers = [
     "38050 111 22 11   ",
 ]
 
+# def normalize_phone(phone_number):
+#     p1 = r"[\d\+]+"
+#     phone_number = ''.join(re.findall(p1, phone_number))
+#     if len(phone_number) == 10:
+#         phone_number = '+38' + phone_number
+#     elif len(phone_number) == 12:
+#         phone_number = '+' + phone_number
+#     return phone_number
+
+# normalized_numbers = [normalize_phone(phone) for phone in raw_numbers]
+
+# print("Нормалізовані номери телефонів для SMS-розсилки:")
+# for number in normalized_numbers:
+#     print(number)
+
 def normalize_phone(phone_number):
-    p1 = r"[\d\+]+"
-    phone_number = ''.join(re.findall(p1, phone_number))
-    if len(phone_number) == 10:
-        phone_number = '+38' + phone_number
-    elif len(phone_number) == 12:
-        phone_number = '+' + phone_number
-    return phone_number
+    phone_number = ''.join(char for char in phone_number if char.isdigit())
+    prefix = '+38' if len(phone_number) == 10 else '+'
+    return prefix + phone_number
 
 normalized_numbers = [normalize_phone(phone) for phone in raw_numbers]
 
