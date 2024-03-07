@@ -10,9 +10,14 @@ def get_days_from_today(date):
     days_diff = (today - date_obj).days
     return days_diff
 
-try:
-    date_input = input("Введіть дату у форматі РРРР-ММ-ДД: ")
-    days_diff = get_days_from_today(date_input)
-    print(f"Кількість днів між введеною датою та поточною: {days_diff} днів")
-except ValueError as e:
-    print(f"Помилка: {e}")
+date_input = input("Введіть дату у форматі РРРР-ММ-ДД: ")
+days_diff = get_days_from_today(date_input)
+print(f"Кількість днів між введеною датою та поточною: {days_diff} днів")
+    
+    
+    
+
+# try:
+#     print(f"Кількість днів між введеною датою та поточною: {(dt.date.today() - dt.datetime.strptime(input('Введіть дату у форматі РРРР-ММ-ДД: '), '%Y-%m-%d').date()).days} днів")
+# except ValueError as e:
+#     print(f"Помилка: {e}")
