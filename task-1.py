@@ -1,20 +1,33 @@
-import datetime as dt
+def total_salary(path):
+    total_salary = 0
+    num_developers = 0
 
-# def get_days_from_today(date):
-#     try:
-#         date_obj = dt.datetime.strptime(date, "%Y-%m-%d").date()
-#     except ValueError:
-#         raise ValueError("Неправильний формат дати. Введіть дату у форматі РРРР-ММ-ДД.")
-    
-#     today = dt.date.today()
-#     days_diff = (today - date_obj).days
-#     return days_diff
+    try:
+        with open(path, 'r') as file:
+            for line in file:
+                parts = line.strip().split(',')
+                if len(parts) == 2:
+                    salary = int(parts[1])
+                    total_salary += salary
+                    num_developers += 1
+                else:
+                    print(f"Skipping invalid line: {line}")
 
-# date_input = input("Введіть дату у форматі РРРР-ММ-ДД: ")
-# days_diff = get_days_from_today(date_input)
-# print(f"Кількість днів між введеною датою та поточною: {days_diff} днів")
+    except FileNotFoundError:
+        print(f"File not found: {path}")
+        return None
 
-try:
-    print(f"Кількість днів між введеною датою та поточною: {(dt.date.today() - dt.datetime.strptime(input('Введіть дату у форматі РРРР-ММ-ДД: '), '%Y-%m-%d').date()).days} днів")
-except ValueError as e:
-    print(f"Помилка: {e}")
+    if num_developers == 0:
+        print("No valid data found in the file.")
+        return None
+
+    average_salary = total_salary / num_developers
+
+    return total_salary, average_salary
+
+file_path = "list.txt"
+result = total_salary(file_path)
+
+if result is not None:
+    total, average = result
+    print(f"Загальна сума заробітної плати: {total}, Середня заробітна плата: {average}")
